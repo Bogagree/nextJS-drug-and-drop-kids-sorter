@@ -4,14 +4,15 @@ Have fun and develop!
 
 > The game is suitable for desktop or tablet (layout width 768px).
  
- ![app example](assets/app_prototipe.jpg)
+ ![app example](assets/img/app_prototipe.jpg)
 
 ## Stack
 - NextJS (*yarn create next-app --typescript*)
 - React.FC
 - TypeScript
 - Redux
-- styled-components
+- @emotion/react (yarn add @emotion/react @emotion/styled)
+- Normalize.css v8.0.1
 
 ## Commits guideline
 - type: description ... 
@@ -23,7 +24,6 @@ Have fun and develop!
 
 *Commit examples:*
 > test: create unit test for profile reducer 
-
- > feat: add Header
+> feat: add Header
 
 

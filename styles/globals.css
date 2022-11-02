@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Helvetica', sans;
+  src: url('../assets/fonts/Helvetica.ttf');
+  font-style: normal;
+}
+
 html,
 body {
   padding: 0;
@@ -17,7 +23,7 @@ a {
 
 @media (prefers-color-scheme: dark) {
   html {
-    color-scheme: dark;
+
   }
   body {
     color: white;
