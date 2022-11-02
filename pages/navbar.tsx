@@ -1,20 +1,31 @@
 import Link from 'next/link'
 import styled from '@emotion/styled';
 import {useRouter} from 'next/router';
+import Image from 'next/image';
 
-const DivCenter = styled.div`
+const NavDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 50%;
+  width: 100%;
+  height: 100px;
+  padding: 5px;
   list-style-type: none;
+  
+  li {
+    padding: 3px;
+  }
+  
+  img {
+    border-radius: 50%;
+  }
 
   .active {
-    color: yellow;
+    color: gold;
   }
 
   & a:hover {
-    background: blueviolet;
+    color: red;
   }
 `
 
@@ -34,14 +45,15 @@ export const Navbar = () => {
     const {pathname} = useRouter()
 
     return <>
-        <DivCenter>
+        <NavDiv>
+            <Image width={100} height={100} src="/TagBogNet_Logo.jpg" alt="developer-logo"/>
             {
                 navigation.map(({id, title, path}) => (
-                    <li className={pathname === path ? "active" : ""}>
-                        <Link key={id} href={path}>{title}</Link>
+                    <li key={id} className={pathname === path ? "active" : ""}>
+                        <Link  href={path}>{title}</Link>
                     </li>
                 ))
             }
-        </DivCenter>
+        </NavDiv>
     </>
 }

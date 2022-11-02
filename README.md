@@ -4,7 +4,7 @@ Have fun and develop!
 
 > The game is suitable for desktop or tablet (layout width 768px).
  
- ![app example](assets/img/app_prototipe.jpg)
+ ![app example](public/img/app_prototipe.jpg)
 
 ## Stack
 - NextJS (*yarn create next-app --typescript*)
