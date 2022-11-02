@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 
+
 const BackgroundLayout = styled.div`
   background: #0070f3;
   width: 100%;

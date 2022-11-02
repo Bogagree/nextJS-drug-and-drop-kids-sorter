@@ -11,6 +11,7 @@ Have fun and develop!
 - React.FC
 - TypeScript
 - Redux
+- SASS
 - @emotion/react (yarn add @emotion/react @emotion/styled)
 - Normalize.css v8.0.1
 
