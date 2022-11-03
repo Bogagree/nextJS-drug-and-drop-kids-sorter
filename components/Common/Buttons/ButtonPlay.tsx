@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Button = styled.button`
+export const ButtonPlay = styled.button`
   cursor: pointer;
   width: 260px;
   height: 60px;
@@ -17,7 +17,12 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.1));
+
   &:hover {
     opacity: 0.8;
+  }
+
+  &:active {
+    background: #7F75F0FF;
   }
 `

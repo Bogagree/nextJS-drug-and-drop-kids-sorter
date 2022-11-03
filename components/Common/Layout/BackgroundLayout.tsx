@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import bg from "../../public/img/backgrounds/background_settings.png"
+import bg from "../../../public/img/backgrounds/background_settings.png"
 
-
+// const bg = [bgSettings, bg1, bg2, bg3, bg4]
 
 const BackgroundLayout = styled.div`
   width: 100%;
