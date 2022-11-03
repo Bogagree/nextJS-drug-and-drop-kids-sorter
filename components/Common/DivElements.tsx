@@ -1,13 +1,5 @@
 import styled from '@emotion/styled';
 
-
-export const UnitsRangeElement = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`
-
 export const BorderDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -39,5 +31,4 @@ export const DivElements = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 5px;
-  
 `

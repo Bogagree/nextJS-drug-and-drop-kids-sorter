@@ -1,17 +1,56 @@
 import React from 'react';
 import Slider from '@mui/material/Slider';
 import styled from '@emotion/styled';
-import {Tooltip} from '@mui/material';
-import {UnitsRangeElement} from './DivElements';
+import {ThemeProvider, createTheme} from '@mui/material/styles';
 
 const StyledTitle = styled.p`
   color: #423F45;
   font-family: 'Helvetica', sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: bold;
   font-size: 32px;
   line-height: 44px;
 `
+
+const theme = createTheme({
+    components: {
+        MuiSlider: {
+            styleOverrides: {
+                markLabel: {
+                    fontSize: '24px',
+                    fontWeight: '700',
+                    fontFamily: 'Calibri',
+                    top: '-30px',
+                    left: '-30px',
+                    color: "#4F4B61",
+                    '&[data-index="5"]': {
+                        paddingRight: '40px',
+                    },
+                    "&:active": {}
+                },
+                mark: {
+                    display: 'none',
+                },
+                thumb: {
+                    height: '23px',
+                    width: '23px',
+                    color: '#104987',
+                    "&:after": {
+                        left: '100px'
+                    }
+                },
+                rail: {
+                    width: '100%',
+                    opacity: '1',
+                    // left: '4%'
+                },
+                track: {}
+            },
+
+        },
+    },
+});
+
 
 type RangePropsType = {
     title: string
@@ -47,15 +86,15 @@ export const Range: React.FC<RangePropsType> = (
                 label: units[i]
             })
     }
-
-    const valueLabelFormat = (value: number) => {
-        let unitIndex = 0;
-        for (let i = 0; i < units.length; i++) {
-            if (value === +units[0]) unitIndex = 0
-            if (+units[i - 1] < value && value < +units[i]) unitIndex = i
-        }
-        return ` ${units[unitIndex]}`;
-    }
+    // calculation for label value
+    // const valueLabelFormat = (value: number) => {
+    //     let unitIndex = 0;
+    //     for (let i = 0; i < units.length; i++) {
+    //         if (value === +units[0]) unitIndex = 0
+    //         if (+units[i - 1] < value && value < +units[i]) unitIndex = i
+    //     }
+    //     return `${units[unitIndex]}`;
+    // }
 
     const handleChange = (event: Event, newValue: number | number[]) => {
         onChangeRange && onChangeRange(newValue as number)
@@ -65,23 +104,20 @@ export const Range: React.FC<RangePropsType> = (
     return (
         <>
             <StyledTitle>{title}</StyledTitle>
-            <UnitsRangeElement>
-                {units.map(unit => <div key={unit}>{unit}</div>)}
-            </UnitsRangeElement>
-            <Slider
-                size="small"
-                value={value}
-                min={minValue}
-                step={step}
-                max={maxValue}
-                // getAriaValueText={valueLabelFormat}
-                // valueLabelFormat={valueLabelFormat}
-                onChange={handleChange}
-                // valueLabelDisplay="off"
-                marks={marks}
-                disabled={disabled}
-                style={{color: 'gold', height: 8}}
-            />
+            <ThemeProvider theme={theme}>
+                <Slider
+                    size="small"
+                    value={value}
+                    min={minValue}
+                    step={step}
+                    max={maxValue}
+                    defaultValue={minValue}
+                    onChange={handleChange}
+                    marks={marks}
+                    disabled={disabled}
+                    style={{color: '#FFD748', height: 23}}
+                />
+            </ThemeProvider>
         </>
     );
 };
