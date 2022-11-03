@@ -41,7 +41,7 @@ const navigation: NavigationType[] = [
     {id: 3, title: 'Game', path: '/game'}
 ]
 
-export const Navbar = () => {
+const Navbar = () => {
     const {pathname} = useRouter()
 
     return <>
@@ -57,3 +57,5 @@ export const Navbar = () => {
         </NavDiv>
     </>
 }
+
+export default Navbar

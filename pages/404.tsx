@@ -12,7 +12,6 @@ const StyledDiv = styled.div`
   align-items: center;
 `
 
-
 export default function Error() {
     const router = useRouter()
 

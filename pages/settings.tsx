@@ -1,5 +1,4 @@
 import {ButtonPlay} from '../components/Common/Buttons/ButtonPlay';
-import BackgroundLayout from '../components/Common/Layout/BackgroundLayout';
 import Head from 'next/head';
 import {RangeSlider} from '../components/RangeSlider/RangeSlider';
 import {BorderDiv, InnerBorderDiv} from '../components/Common/DivStyled/DivGradientBorder';
@@ -7,15 +6,19 @@ import {DivCenterStyled} from '../components/Common/DivStyled/DivCenter';
 import {ButtonGameOrder} from '../components/Common/Buttons/ButtonGameOrder';
 import {DivSpaceBetween} from '../components/Common/DivStyled/DivSpaceBetween';
 import {useState} from 'react';
+import {useRouter} from 'next/router';
+import {BackgroundLayout} from '../components/Common/Layout/BackgroundLayout';
+
+export const gameNumberOfItemsUnits = ['2', '3', '4', '5'];
+export const gameValueUnits = ['A', '9', '19', '50', '99', '999'];
 
 export default function Settings() {
-
-    const gameNumberOfItemsUnits = ['2', '3', '4', '5'];
-    const gameValueUnits = ['A', '9', '19', '50', '99', '999'];
 
     const [gameOrder, setGameOrder] = useState(false)
     const [gameValue, setGameValue] = useState(0)
     const [gameItems, setGameItems] = useState(2)
+
+    const router = useRouter()
 
     const gameOrderHandle = () => {
         setGameOrder(!gameOrder)
@@ -29,9 +32,10 @@ export default function Settings() {
         setGameItems(value)
     }
 
-    console.log('gameItems:', gameItems)
-    console.log('gameValue:', gameValue)
-    console.log('gameOrder:', gameOrder)
+    const startGame = () => {
+
+        router.push('/game')
+    }
 
     return (
         <>
@@ -55,14 +59,14 @@ export default function Settings() {
                                              onChangeRange={gameValueChanger}/>
                             </div>
 
-                            <DivSpaceBetween >
-                                <ButtonGameOrder disabled={gameOrder} onClick={gameOrderHandle}>По
-                                    возрастанию</ButtonGameOrder>
-                                <ButtonGameOrder disabled={!gameOrder} onClick={gameOrderHandle}>По
-                                    убыванию</ButtonGameOrder>
+                            <DivSpaceBetween>
+                                <ButtonGameOrder disabled={gameOrder}
+                                                 onClick={gameOrderHandle}>По возрастанию</ButtonGameOrder>
+                                <ButtonGameOrder disabled={!gameOrder}
+                                                 onClick={gameOrderHandle}>По убыванию</ButtonGameOrder>
                             </DivSpaceBetween>
 
-                            <ButtonPlay>Играть</ButtonPlay>
+                            <ButtonPlay onClick={startGame}>Играть</ButtonPlay>
 
                         </DivCenterStyled>
 
