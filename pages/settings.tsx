@@ -8,9 +8,13 @@ import {DivSpaceBetween} from '../components/Common/DivStyled/DivSpaceBetween';
 import {useState} from 'react';
 import {useRouter} from 'next/router';
 import {BackgroundLayout} from '../components/Common/Layout/BackgroundLayout';
+import bgSettings from "../public/img/backgrounds/background_settings.png"
+
 
 export const gameNumberOfItemsUnits = ['2', '3', '4', '5'];
 export const gameValueUnits = ['A', '9', '19', '50', '99', '999'];
+
+// const bg = [bgSettings, bg1, bg2, bg3, bg4]
 
 export default function Settings() {
 
@@ -43,7 +47,7 @@ export default function Settings() {
                 <title>Настройки игры</title>
             </Head>
 
-            <BackgroundLayout>
+            <BackgroundLayout src={bgSettings.src}>
 
                 <BorderDiv>
                     <InnerBorderDiv>

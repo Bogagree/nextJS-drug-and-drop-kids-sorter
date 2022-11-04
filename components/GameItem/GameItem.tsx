@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, ReactNode} from 'react';
 import styled from '@emotion/styled'
 import treeToy1 from '../../public/img/gameToys/cristmasTreeToys/treeToy1.png'
 import treeToy2 from '../../public/img/gameToys/cristmasTreeToys/treeToy2.png'
@@ -21,8 +21,9 @@ const itemsBg = {
 }
 
 
-type ImageProps = {
+export type ImageProps = {
     src: string
+    children?: ReactNode
 }
 
 const ItemDiv = styled.div<ImageProps>`

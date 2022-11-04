@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
-import bg from "../../../public/img/backgrounds/background_settings.png"
+import {ImageProps} from '../../GameItem/GameItem';
 
-// const bg = [bgSettings, bg1, bg2, bg3, bg4]
 
-export const BackgroundLayout = styled.div`
+
+export const BackgroundLayout = styled.div<ImageProps>`
   width: 100%;
   height: 100vh;
   margin: 0;
   display: grid;
   place-items: center;
-  background-image: url(${bg.src});
+  background-image: url(${props => props.src});
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
