@@ -2,7 +2,7 @@ import {ButtonPlay} from '../components/Common/Buttons/ButtonPlay';
 import Head from 'next/head';
 import {RangeSlider} from '../components/RangeSlider/RangeSlider';
 import {BorderDiv, InnerBorderDiv} from '../components/Common/DivStyled/DivGradientBorder';
-import {DivCenterStyled} from '../components/Common/DivStyled/DivCenter';
+import {DivColumn} from '../components/Common/DivStyled/DivColumn';
 import {ButtonGameOrder} from '../components/Common/Buttons/ButtonGameOrder';
 import {DivSpaceBetween} from '../components/Common/DivStyled/DivSpaceBetween';
 import {useState} from 'react';
@@ -14,7 +14,6 @@ import bgSettings from "../public/img/backgrounds/background_settings.png"
 export const gameNumberOfItemsUnits = ['2', '3', '4', '5'];
 export const gameValueUnits = ['A', '9', '19', '50', '99', '999'];
 
-// const bg = [bgSettings, bg1, bg2, bg3, bg4]
 
 export default function Settings() {
 
@@ -47,11 +46,11 @@ export default function Settings() {
                 <title>Настройки игры</title>
             </Head>
 
-            <BackgroundLayout src={bgSettings.src}>
+            <BackgroundLayout src={bgSettings.src} >
 
                 <BorderDiv>
                     <InnerBorderDiv>
-                        <DivCenterStyled>
+                        <DivColumn>
 
                             <div style={{width: 366, height: 112}}>
                                 <RangeSlider title={'Кол-во предметов'} units={gameNumberOfItemsUnits}
@@ -72,7 +71,7 @@ export default function Settings() {
 
                             <ButtonPlay onClick={startGame}>Играть</ButtonPlay>
 
-                        </DivCenterStyled>
+                        </DivColumn>
 
                     </InnerBorderDiv>
                 </BorderDiv>
