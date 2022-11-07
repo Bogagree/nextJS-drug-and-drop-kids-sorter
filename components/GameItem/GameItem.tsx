@@ -1,4 +1,4 @@
-import React, {ElementType, FC, DragEvent} from 'react';
+import React, {ElementType, FC} from 'react';
 import styled from '@emotion/styled'
 import treeToy1 from '../../public/img/gameToys/cristmasTreeToys/treeToy1.png'
 import treeToy2 from '../../public/img/gameToys/cristmasTreeToys/treeToy2.png'
@@ -43,10 +43,6 @@ const ItemDiv = styled.div<ImageProps>`
 
 export type GameItemPropsType = {
     gameItem: GameItemType
-    dragStartHandle: (e: DragEvent<HTMLDivElement>, item: GameItemType) => void
-    dragEndHandle: (e: DragEvent<HTMLDivElement>) => void
-    dragOverHandle: (e: DragEvent<HTMLDivElement>) => void
-    dropHandle: (e: DragEvent<HTMLDivElement>, item: GameItemType) => void
 }
 
 export type GameItemType = {
@@ -60,12 +56,7 @@ export const GameItem: FC<GameItemPropsType> = (props) => {
 
     return (
         <>
-            <ItemDiv id={`${props.gameItem.id}`} draggable={true}
-                     onDragStart={(e) => props.dragStartHandle(e, props.gameItem)}
-                     onDragLeave={(e) => props.dragEndHandle(e)}
-                     onDragEnd={(e) => props.dragEndHandle(e)}
-                     onDragOver={(e) => props.dragOverHandle(e)}
-                     onDrop={(e) => props.dropHandle(e, props.gameItem)}
+            <ItemDiv id={`${props.gameItem.id}`}
                      src={itemsBg.treeToys[0].src}
             >
                 {props.gameItem.id}
