@@ -38,7 +38,8 @@ type NavigationType = {
 const navigation: NavigationType[] = [
     {id: 1, title: 'Home', path: '/'},
     {id: 2, title: 'Settings', path: '/settings'},
-    {id: 3, title: 'Game', path: '/game'}
+    {id: 3, title: 'Game', path: '/game'},
+    // {id: 4, title: 'GameCopy', path: '/gameCopy'}
 ]
 
 const Navbar = () => {

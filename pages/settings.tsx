@@ -1,13 +1,13 @@
-import {ButtonPlay} from '../components/Common/Buttons/ButtonPlay';
+import {ButtonPlay} from '../src/components/Buttons/ButtonPlay';
 import Head from 'next/head';
-import {RangeSlider} from '../components/RangeSlider/RangeSlider';
-import {BorderDiv, InnerBorderDiv} from '../components/Common/DivStyled/DivGradientBorder';
-import {DivColumn} from '../components/Common/DivStyled/DivColumn';
-import {ButtonGameOrder} from '../components/Common/Buttons/ButtonGameOrder';
-import {DivSpaceBetween} from '../components/Common/DivStyled/DivSpaceBetween';
+import {RangeSlider} from '../src/components/settingsPageComponents/RangeSlider/RangeSlider';
+import {BorderDiv, InnerBorderDiv} from '../src/components/DivStyled/DivGradientBorder';
+import {DivColumn} from '../src/components/DivStyled/DivColumn';
+import {ButtonGameOrder} from '../src/components/Buttons/ButtonGameOrder';
+import {DivSpaceBetween} from '../src/components/DivStyled/DivSpaceBetween';
 import {useState} from 'react';
 import {useRouter} from 'next/router';
-import {BackgroundLayout} from '../components/Common/Layout/BackgroundLayout';
+import {BackgroundLayout} from '../src/components/Layout/BackgroundLayout';
 import bgSettings from "../public/img/backgrounds/background_settings.png"
 
 

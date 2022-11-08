@@ -1,5 +1,5 @@
 import 'normalize.css';
-import '../styles/globals.scss'
+import '../src/styles/globals.scss'
 import type {AppProps} from 'next/app'
 import Navbar from './navbar';
 

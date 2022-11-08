@@ -2,7 +2,8 @@ import styled from '@emotion/styled';
 import {ImageProps} from '../GameItem/GameItem';
 
 export const ItemsSlotWrapper = styled.div<ImageProps>`
-  min-width: 100%;
+  width: 100%;
+  min-width: 890px;
   height: 222px;
 
   background-image: url(${props => props.src});

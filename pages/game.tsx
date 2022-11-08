@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React, {FC, useEffect, useState} from 'react';
-import {GameItem, GameItemType} from '../components/GameItem/GameItem';
-import {BackgroundLayout} from '../components/Common/Layout/BackgroundLayout';
+import {BackgroundLayout} from '../src/components/Layout/BackgroundLayout';
 import bg1 from '../public/img/backgrounds/game_background1.png'
 import bg2 from '../public/img/backgrounds/game_background2.png'
 import bg3 from '../public/img/backgrounds/game_background3.png'
@@ -10,12 +9,11 @@ import slot1 from '../public/img/slots/slots1.png'
 import slot2 from '../public/img/slots/slots2.png'
 import slot3 from '../public/img/slots/slots3.png'
 import slot4 from '../public/img/slots/slots4.png'
-import {DivColumn} from '../components/Common/DivStyled/DivColumn';
-import {DivSpaceBetween} from '../components/Common/DivStyled/DivSpaceBetween';
-import {DropItemContainer, ItemsDropContainer, ItemsSlotWrapper} from '../components/ItemsSlot/ItemsSlot';
 import {DragDropContext, Draggable, Droppable, DropResult, resetServerContext} from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
-import {GetServerSideProps} from 'next';
+import {GameItemType, GameStateType} from '../src/types/stateTypes';
+import initialGameState from '../state/state';
+import ItemsForGame from '../src/components/gamePageComponents/ItemsForGame';
 
 type GamePropsType = {
     unitsType: boolean
@@ -27,57 +25,77 @@ const slots = [slot1, slot2, slot3, slot4]
 
 const getGameItemStyle = (isDragging: boolean, draggableStyle: any) => ({
     padding: 10,
-    margin: `0 50px 15px 50px`,
+    marginBottom: 15,
     background: isDragging ? "#4acdf1" : "#1ca322",
     borderRadius: isDragging ? "50%" : "5px",
 
     ...draggableStyle
 })
 
-const DnDContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
+const getSlotItemStyle = (isDragging: boolean, draggableStyle: any) => ({
+    padding: 10,
+    marginBottom: 15,
+    background: isDragging ? "#a66cda" : "#f9b601",
+    borderRadius: isDragging ? "50%" : "5px",
+
+    ...draggableStyle
+})
+
+const getListStyle = (isDraggingOver: boolean) => ({
+    background: isDraggingOver ? 'lightblue' : 'lightgrey',
+    display: 'flex',
+    padding: '5px',
+    overflow: 'auto',
+});
 
 const Game: FC<GamePropsType> = ({unitsType, unitsValue}) => {
 
-    const [gameItems, setGameItems] = useState<GameItemType[]>([])
-    const [currentCard, setCurrentCard] = useState<GameItemType | null>(null)
+    const [gameState, setGameState] = useState<GameStateType>(initialGameState)
 
     const generateItems = (newItems: GameItemType[], unitsValue: number) => {
         for (let i = 0; i < unitsValue; i++) {
-            newItems.push({id: i, value: `${i}`, order: i})
+            newItems.push({ id: `${i}`, value: i})
         }
         console.log(newItems)
         return newItems
     }
 
-
     const onDragEnd = (result: DropResult) => {
         const {source, destination} = result
+        // if tries drop in undefined destination
         if (!destination) return
 
-        const items = Array.from(gameItems)
-        // const items = [...gameItems]
+        // if drag and drop same position
+        // if (destination.droppableId === source.droppableId && destination.index === source.index) {
+        //     return
+        // }
 
-        const [newOrder] = items.splice(source.index, 1)
+        //if user drops within the same column in a different position
 
-        items.splice(destination.index, 0, newOrder)
-
-        setGameItems(items)
+        // const items = Array.from(gameItems)
+        // if (gameState) {
+        //     const row = gameState
+        //     const items = [...gameState.gameItems]
+        //
+        //     const [newOrder] = items.splice(source.index, 1)
+        //
+        //     items.splice(destination.index, 0, newOrder)
+        //
+        //     setGameState({...gameState, gameItems: [...items]})
+        // }
     }
 
-    useEffect(() => {
-
-        setTimeout((() => {
-            let asyncItems: GameItemType[] = []
-            generateItems(asyncItems, 5)
-            setGameItems(asyncItems)
-        }), 3000)
-    }, [])
-
-    resetServerContext()
+    // useEffect(() => {
+    //
+    //     setTimeout((() => {
+    //         let asyncItems: GameItemType[] = []
+    //         generateItems(asyncItems, 5)
+    //
+    //         setGameState({
+    //             ...gameState, gameItems: { ['newId']: {id: '12', value: 12}}
+    //         })
+    //     }), 3000)
+    // }, [])
 
     return (
         <>
@@ -86,54 +104,14 @@ const Game: FC<GamePropsType> = ({unitsType, unitsValue}) => {
 
             <BackgroundLayout src={bg[0].src}>
                 <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable droppableId={'gameItems'}>
-                        {(provided) => (
-                            <div className={'gameItems'} {...provided.droppableProps} ref={provided.innerRef}>
-                                {gameItems.map((item, index) => {
-                                    return (
-                                        <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                                            {(provided, snapshot) => (
-                                                <div
-                                                    ref={provided.innerRef}
-                                                    {...provided.draggableProps}
-                                                    {...provided.dragHandleProps}
-                                                    style={getGameItemStyle(snapshot.isDragging,
-                                                        provided.draggableProps.style)}
-                                                >
-                                                    {<GameItem gameItem={item}/>}
-                                                    <div>{item.id}</div>
-                                                </div>
 
-                                            )}
-                                        </Draggable>)
-                                })}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
+                    {gameState.columnOrders.map((columnId) => {
+                        const column = gameState.columns[columnId];
+                        const gameItems = column.gameItemIds.map((gameItemId) => gameState.gameItems[gameItemId]);
+                        return <ItemsForGame column={column} gameItems={gameItems}/>
+                    })}
 
-                    <DivColumn>
-
-
-                        <DivSpaceBetween>
-
-                        </DivSpaceBetween>
-
-                        <div style={{width: '100%'}}>
-                            <ItemsSlotWrapper src={slots[0].src}>
-                                <ItemsDropContainer>
-                                    <DropItemContainer/>
-                                    <DropItemContainer/>
-                                    <DropItemContainer/>
-                                    <DropItemContainer/>
-                                    <DropItemContainer/>
-                                </ItemsDropContainer>
-
-                            </ItemsSlotWrapper>
-                        </div>
-                    </DivColumn>
                 </DragDropContext>
-
             </BackgroundLayout>
         </>
     );

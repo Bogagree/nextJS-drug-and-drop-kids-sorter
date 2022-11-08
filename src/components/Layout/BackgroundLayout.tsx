@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import {ImageProps} from '../../GameItem/GameItem';
+import {ImageProps} from '../gamePageComponents/GameItem/GameItem';
 
 export const BackgroundLayout = styled.div<ImageProps>`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   display: grid;
   place-items: center;

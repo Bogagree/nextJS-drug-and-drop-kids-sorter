@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.scss'
+import styles from '../src/styles/Home.module.scss'
 import Head from 'next/head';
 
 const Home = () => {
